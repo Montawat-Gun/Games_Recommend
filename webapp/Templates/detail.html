@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>{{name}}</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <style>
+    body {
+      background-image: url("https://s3-ap-southeast-1.amazonaws.com/emago-asset-dev/rfm-asset/Header-Gameqoo.jpg");
+      background-color: #AAAAAA;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+    }
+
+    h5 {
+      font-weight: normal;
+    }
+  </style>
+</head>
+
+<body>
+  <!--Nav bar-->
+  <nav class="navbar navbar-dark bg-dark sticky-top justify-content-between shadow" style="margin-bottom: 50px;">
+    <a class="navbar-brand" style="color: whitesmoke;">GAMES SHOP RECOMMEND</a>
+    <form class="form-inline">
+      <button type="button" class="btn btn-success" onclick="location.href='/cart'">CART :&nbsp;{{cart}}</button>
+    </form>
+  </nav>
+  <!--Nav bar-->
+
+  <div class="container bg-light shadow p-5 rounded-lg" style="background: white;">
+    <button type="button" class="btn btn-outline-success" onclick="location.href='/'">BACK TO HOME</button>
+    <br><br>
+    <h2>{{name}}</h2>
+    <br>
+    <h4>DESCRIPTION : </h4>
+    <h5>{{desc}}</h5>
+    <br>
+    <h4>DEVELOPER : </h4>
+    <h5>{{dev}}</h5>
+    <br>
+    <h4>PUBLISHER : </h4>
+    <h5>{{pub}}</h5>
+    <br>
+    <h4>RELEASE DATE : </h4>
+    <h5>{{date}}</h5>
+    <br>
+    <h4>TAGS : </h4>
+    <h5>{{tags}}</h5>
+    <br>
+    <h4>PRICE : </h4>
+    <h5>${{price}}</h5>
+    <br>
+    <form action="addtocart" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success" value="{{ name }}" name="game" onclick="location.href='/addtocart'" style="width: 100%;">
+    </form>
+    <h4>ADD TO CART</h4>
+    </button>
+    <br><br><br>
+    <h4>RECOMMEND GAMES</h4>
+    {% for rec in recs %}
+    <form action="detail" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-outline-success" value="{{rec.1}}" name="game"
+        onclick="location.href='/detail'" style="width: 100%;">
+        <h4>{{rec.1}}</h4>
+      </button>
+    </form>
+    <br>
+    {% endfor %}
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
